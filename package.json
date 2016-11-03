@@ -6,8 +6,8 @@
   "scripts": {
     "preinstall": "npm i webpack less mocha webpack-dev-server eslint -g",
     "start": "npm run production",
-    "production": "npm run lint && npm test && webpack-dev-server --config webpack.production.config.js",
-    "development": "npm run lint && npm test && webpack-dev-server",
+    "production": "npm test && webpack-dev-server --config webpack.production.config.js",
+    "development": "npm test && webpack-dev-server",
     "lint": "eslint src tests",
     "test": "mocha tests"
   },
