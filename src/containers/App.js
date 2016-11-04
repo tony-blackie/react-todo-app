@@ -114,7 +114,9 @@ class TodoApp extends Component {
                             text: this.input.value,
                             id: nextTodoId++
                         });
-                        this.input.value = '';
+                        if (this.input) {
+                            this.input.value = '';
+                        }
                     }}>
                         Add Todo
                     </button>
