@@ -100,8 +100,8 @@ let nextTodoId = 0;
 
 class TodoApp extends Component {
     render() {
-        const visibleTodos = getVisibleTodos(this.props.todos, this.props.visibilityFilter);
-        if (this.props.todos) {
+        const visibleTodos = getVisibleTodos(this.props.todos, this.props.visibilityFilter) || [];
+
             return (
                 <div>
                     <input ref={node => {
@@ -114,13 +114,16 @@ class TodoApp extends Component {
                             text: this.input.value,
                             id: nextTodoId++
                         });
-                        this.input.value = '';
+                        if(this.input) {
+                            this.input.value = '';
+                        }
+
                     }}>
                         Add Todo
                     </button>
                     <ul>
                         {
-                            this.props.todos.map(todo =>
+                            visibleTodos.map(todo =>
                                 <li key={todo.id}
                                     onClick={() => {
                                         store.dispatch({
@@ -146,28 +149,6 @@ class TodoApp extends Component {
                     </p>
                 </div>
             );
-        } else {
-            return (
-                <div>
-                    <input ref={node => {
-                        this.input = node;
-                    }}
-                    />
-                    <button onClick={() => {
-                        store.dispatch({
-                            type: 'ADD_TODO',
-                            text: this.input.value,
-                            id: nextTodoId++
-                        });
-                        if (this.input) {
-                            this.input.value = '';
-                        }
-                    }}>
-                        Add Todo
-                    </button>
-                </div>
-            );
-        }
 
     }
 }
@@ -175,7 +156,7 @@ class TodoApp extends Component {
 const render = () => {
     ReactDOM.render(
         <TodoApp
-            todos={store.getState().todos}
+            {...store.getState()}
         />,
         document.getElementById('root')
     );
