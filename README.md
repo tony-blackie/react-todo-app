@@ -19,5 +19,14 @@ ES2015, babel, react, redux, less, bem, webpack, mocha, eslint, git
 $ git clone <url> <my-project-name>
 $ cd <my-project-name>
 $ npm i
-$ npm start
+$ npm install webpack-dev-server
+$ npm run development
+```
+### Troubleshooting
+
+If you see errors from webpack module or webpack-dev-server, try:
+```
+$ npm install webpack-dev-server -g
+$ npm install webpack
+npm run development
 ```
